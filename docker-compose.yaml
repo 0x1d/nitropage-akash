@@ -1,0 +1,15 @@
+version: '3'
+services:
+  nitropage:
+    image: ${NP_IMAGE}:${NP_VERSION}
+    env_file: .env
+    build:
+      context: .
+      args:
+        - VERSION=${NP_VERSION}
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    volumes:
+      - ./db:/var/db
+      - ./media:/var/app/public/media

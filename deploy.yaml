@@ -1,0 +1,35 @@
+---
+version: "2.0"
+services:
+  nitropage:
+    image: wirelos/nitropage:0.31.0
+    expose:
+      - port: 80
+        as: 80
+        http_options:
+          max_body_size: 104857600
+        to:
+          - global: true
+    env:
+      - DATABASE_URL=file:/var/db/dev.db
+profiles:
+  compute:
+    nitropage:
+      resources:
+        cpu:
+          units: 0.5
+        memory:
+          size: 256Mi
+        storage:
+          - size: 1Gi
+  placement:
+    dcloud:
+      pricing:
+        nitropage:
+          denom: uakt
+          amount: 1000
+deployment:
+  nitropage:
+    dcloud:
+      profile: nitropage
+      count: 1
