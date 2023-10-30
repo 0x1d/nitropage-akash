@@ -2,7 +2,9 @@ version: '3'
 services:
   nitropage:
     image: ${NP_IMAGE}:${NP_VERSION}
-    env_file: .env
+#    env_file: .env
+    environment:
+      - DATABASE_URL=file:/var/db/dev.db
     build:
       context: .
       args:

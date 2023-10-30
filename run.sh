@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# for demo purpose, we use a local SQLite database
+DB_FILE=/var/db/dev.db
+
 if [ ! -f "$DB_FILE" ]; then
 	echo "$DB_FILE does not exist - initialize database"
 	npx prisma migrate dev --name nitro
