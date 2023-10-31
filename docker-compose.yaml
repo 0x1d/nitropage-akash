@@ -1,10 +1,14 @@
 version: '3'
 services:
   nitropage:
-    image: ${NP_IMAGE}:${NP_VERSION}
-#    env_file: .env
+    image: ${NP_IMAGE}-starter:${NP_VERSION}
+    env_file: .env
     environment:
+      # path to database file
       - DATABASE_URL=file:/var/db/dev.db
+      # Enable demo mode (disables uploads, project and file removal)
+      - NP_DEMO=1
+      - VITE_NP_DEMO=1
     build:
       context: .
       args:
