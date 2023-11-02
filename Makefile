@@ -11,9 +11,9 @@ ${DOCKER_TARGETS}:
 .PHONY: init
 init:
 	cp example.env .env
-	mkdir -p media db
-	chown ${UID}:${GID} media db
+	mkdir -p srv
+	chown ${UID}:${GID} srv
 
 .PHONY: clean
 clean:
-	rm -rf db media
+	rm -rf srv

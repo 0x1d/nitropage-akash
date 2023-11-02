@@ -1,10 +1,18 @@
 #!/usr/bin/env bash
 
-# for demo purpose, we use a local SQLite database
-DB_FILE=/var/db/dev.db
+DB_FILE=/srv/db/dev.db
+MEDIA_DIR=/srv/media
+
+if [ -d "$MEDIA_DIR" ] && [ -L "$MEDIA_DIR" ]; then
+	echo "Directory $MEDIA_DIR exists." 
+else
+	mkdir -p $MEDIA_DIR
+	ln -s $MEDIA_DIR /var/app/public/media
+fi
 
 if [ ! -f "$DB_FILE" ]; then
 	echo "$DB_FILE does not exist - initialize database"
+	mkdir -p /srv/db/
 	npx prisma migrate dev --name nitro
 	if [[ $NP_DEMO -eq 1 ]]; then
 	echo "Apply demo seed"
