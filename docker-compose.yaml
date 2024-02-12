@@ -5,7 +5,7 @@ services:
     env_file: .env
     environment:
       - DATABASE_URL=file:/srv/db/dev.db
-      - NP_DEMO=1
+      - NP_DEMO=0
     build:
       context: .
       args:
